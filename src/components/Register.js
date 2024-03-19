@@ -1,5 +1,6 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -7,7 +8,15 @@ const Register = () => {
     password: "",
     username: "",
   });
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [variant, setVariant] = useState("LOGIN");
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
       setVariant("REGISTER");
@@ -15,10 +24,13 @@ const Register = () => {
       setVariant("LOGIN");
     }
   }, [variant]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="mt-8 mb-20 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {variant === "REGISTER" && (
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
@@ -68,7 +80,9 @@ const Register = () => {
           <div>
             <button
               type="submit"
-              className="flex justify-center rounded-md px-3 py-2 w-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600 text-white"
+              className={`flex justify-center rounded-md px-3 py-2 w-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600 text-white ${
+                buttonDisabled ? "cursor-not-allowed opacity-50" : ""
+              }`}
             >
               {variant === "LOGIN" ? "Sign in" : "Register"}
             </button>
