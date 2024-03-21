@@ -1,8 +1,11 @@
 "use client";
-import { useRouter } from "next/router";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -26,6 +29,14 @@ const Register = () => {
   }, [variant]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post("/api/users/signup", user);
+      console.log("Signup success", response.data);
+      router.push("/profile");
+    } catch (error) {
+      toast.error(error.message);
+      console.log("signup failed", error.message);
+    }
   };
   return (
     <div className="mt-8 mb-20 sm:mx-auto sm:w-full sm:max-w-md">
