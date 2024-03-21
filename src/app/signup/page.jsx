@@ -6,11 +6,12 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import React from "react";
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter();
   const [user, setUser] = useState({
     email: "",
     password: "",
+    username: "",
   });
   const [buttonDisabled, setButtonDisabled] = useState(false);
   useEffect(() => {
@@ -26,7 +27,8 @@ export default function Login() {
     try {
       const response = await axios.post("/api/users/signup", user);
       console.log("Signup success", response.data);
-      router.push("/profile");
+      toast.success("Registered Successfully");
+      router.push("/login");
     } catch (error) {
       toast.error(error.message);
       console.log("signup failed", error.message);
@@ -37,12 +39,28 @@ export default function Login() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image alt="Logo" height="48" width="48" className="mx-auto w-10" />
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-          Sign in to your account
+          Sign up to your account
         </h2>
       </div>
       <div className="mt-8 mb-20 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  placeholder="Enter Your Username"
+                  value={user.username}
+                  onChange={(e) =>
+                    setUser({ ...user, username: e.target.value })
+                  }
+                  className="px-2 form-input block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
             <div>
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 EmailId
