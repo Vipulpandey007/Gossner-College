@@ -24,12 +24,13 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/signup", user);
-      console.log("Signup success", response.data);
+      const response = await axios.post("/api/users/login", user);
+      console.log("login success", response.data);
+      toast.success("Login success");
       router.push("/profile");
     } catch (error) {
       toast.error(error.message);
-      console.log("signup failed", error.message);
+      console.log("login failed", error.message);
     }
   };
   return (
