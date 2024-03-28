@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 export default function Login() {
   const router = useRouter();
@@ -100,8 +101,9 @@ export default function Login() {
             <div className="mt-6 flex gap-2">Social icons</div>
           </div>
           <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
-            <div>Already a account</div>
-            <div className="underline cursor-pointer">Create a account</div>
+            <Link href="/signup">
+              <div className="underline cursor-pointer">Create a account</div>
+            </Link>
           </div>
         </div>
       </div>

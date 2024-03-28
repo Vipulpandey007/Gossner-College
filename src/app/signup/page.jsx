@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 export default function Signup() {
   const router = useRouter();
@@ -98,7 +99,7 @@ export default function Signup() {
                   buttonDisabled ? "cursor-not-allowed opacity-50" : ""
                 }`}
               >
-                Signin
+                Signup
               </button>
             </div>
           </form>
@@ -117,8 +118,9 @@ export default function Signup() {
             <div className="mt-6 flex gap-2">Social icons</div>
           </div>
           <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
-            <div>Already a account</div>
-            <div className="underline cursor-pointer">Create a account</div>
+            <Link href="login">
+              <div className="underline cursor-pointer">Already a account</div>
+            </Link>
           </div>
         </div>
       </div>
