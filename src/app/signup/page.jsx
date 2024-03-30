@@ -9,6 +9,7 @@ import Link from "next/link";
 
 export default function Signup() {
   const router = useRouter();
+  const [error, setError] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -32,6 +33,7 @@ export default function Signup() {
       router.push("/login");
     } catch (error) {
       toast.error(error.message);
+      setError(true);
       console.log("signup failed", error.message);
     }
   };
@@ -122,6 +124,9 @@ export default function Signup() {
               <div className="underline cursor-pointer">Already a account</div>
             </Link>
           </div>
+          {error && (
+            <h3 className="mt-4 text-red-800 text-center">Signup Failed</h3>
+          )}
         </div>
       </div>
     </div>

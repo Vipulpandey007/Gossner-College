@@ -13,6 +13,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   useEffect(() => {
     if (user.email.length > 0 && user.password.length > 0) {
@@ -31,6 +32,7 @@ export default function Login() {
       router.push("/profile");
     } catch (error) {
       toast.error(error.message);
+      setError(true);
       console.log("login failed", error.message);
     }
   };
@@ -105,6 +107,11 @@ export default function Login() {
               <div className="underline cursor-pointer">Create a account</div>
             </Link>
           </div>
+          {error && (
+            <h3 className="mt-4 text-red-800 text-center">
+              Email Id or Password incorrect
+            </h3>
+          )}
         </div>
       </div>
     </div>
