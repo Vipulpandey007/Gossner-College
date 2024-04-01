@@ -39,7 +39,9 @@ export const sendEmail = async ({ email, emailType, userId }) => {
       }
       or copy and paste the link below in your browser. <br> ${
         process.env.DOMAIN
-      }/verifyemail?token=${hashToken}
+      }/${
+        emailType === "VERIFY" ? "verifyemail" : "setnewpassword"
+      }?token=${hashToken}
       </p>`,
     };
 

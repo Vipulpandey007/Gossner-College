@@ -100,7 +100,14 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="mt-6 flex gap-2">Social icons</div>
+            <div className="mt-6 flex gap-2">
+              <Link
+                href="/forgotpassword"
+                className="text-sm w-fit hover:text-gray-600"
+              >
+                Forgot Password?
+              </Link>
+            </div>
           </div>
           <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
             <Link href="/signup">

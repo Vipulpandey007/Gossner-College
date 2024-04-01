@@ -16,7 +16,7 @@ export default function GetResetPasswordLinkPage() {
   const [loading, setLoading] = useState(false);
 
   const checkButtonState = async () => {
-    if (!buttondisabled) {
+    if (!buttonDisabled) {
       const resetPassword = async () => {
         try {
           setLoading(true);
@@ -78,6 +78,7 @@ export default function GetResetPasswordLinkPage() {
         {!success && (
           <button
             type="submit"
+            onClick={checkButtonState}
             className={`flex my-5 justify-center rounded-md px-3 py-2 w-full text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-sky-500 hover:bg-sky-600 focus-visible:outline-sky-600 text-white ${
               buttonDisabled ? "cursor-not-allowed opacity-50" : ""
             }`}
