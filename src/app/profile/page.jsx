@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 const page = () => {
   const [userData, setUserData] = useState("nothing");
+  const [verified, setVerified] = useState("nothing");
   const router = useRouter();
   const logout = async () => {
     try {
@@ -23,28 +24,42 @@ const page = () => {
       const user = await axios.get("/api/users/user");
       console.log(user);
       setUserData(user.data.data.username);
+      setVerified(user.data.data.isVerified);
     };
     getUsers();
   }, []);
+  console.log(verified);
   return (
     <>
-      <div>
-        Profile Page
-        <hr />
-        <h2>
-          {userData === "Nothing" ? (
-            "No user"
-          ) : (
-            <Link href={`/profile/${userData}`}>{userData}</Link>
-          )}
-        </h2>
-        <button
-          onClick={logout}
-          className="bg-blue-500 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4"
-        >
-          Logout
-        </button>
-      </div>
+      {verified === true ? (
+        <div>
+          Profile Page
+          <hr />
+          <h2>
+            {userData === "Nothing" ? (
+              "No user"
+            ) : (
+              <Link href={`/profile/${userData}`}>{userData}</Link>
+            )}
+          </h2>
+          <button
+            onClick={logout}
+            className="bg-blue-500 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <>
+          <div>Verify your email first</div>{" "}
+          <button
+            onClick={logout}
+            className="bg-blue-500 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Logout
+          </button>
+        </>
+      )}
     </>
   );
 };
