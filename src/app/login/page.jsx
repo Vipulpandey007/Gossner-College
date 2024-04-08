@@ -14,6 +14,7 @@ export default function Login() {
     password: "",
   });
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   useEffect(() => {
     if (user.email.length > 0 && user.password.length > 0) {
@@ -31,9 +32,9 @@ export default function Login() {
       toast.success("Login success");
       router.push("/profile");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.error);
+      setErrorMsg(error.response.data.error);
       setError(true);
-      console.log("login failed", error.message);
     }
   };
   return (
@@ -89,17 +90,6 @@ export default function Login() {
             </div>
           </form>
           <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500">
-                  Or Continue with
-                </span>
-              </div>
-            </div>
-
             <div className="mt-6 flex gap-2">
               <Link
                 href="/forgotpassword"
@@ -115,9 +105,7 @@ export default function Login() {
             </Link>
           </div>
           {error && (
-            <h3 className="mt-4 text-red-800 text-center">
-              Email Id or Password incorrect
-            </h3>
+            <h3 className="mt-4 text-red-800 text-center">{errorMsg}</h3>
           )}
         </div>
       </div>

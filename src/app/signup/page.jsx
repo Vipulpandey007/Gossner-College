@@ -10,6 +10,7 @@ import Link from "next/link";
 export default function Signup() {
   const router = useRouter();
   const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -32,9 +33,9 @@ export default function Signup() {
       toast.success("Registered Successfully");
       router.push("/verify");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.error);
+      setErrorMsg(error.response.data.error);
       setError(true);
-      console.log("signup failed", error.message);
     }
   };
   return (
@@ -105,27 +106,14 @@ export default function Signup() {
               </button>
             </div>
           </form>
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="bg-white px-2 text-gray-500">
-                  Or Continue with
-                </span>
-              </div>
-            </div>
 
-            <div className="mt-6 flex gap-2">Social icons</div>
-          </div>
           <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
             <Link href="login">
               <div className="underline cursor-pointer">Already a account</div>
             </Link>
           </div>
           {error && (
-            <h3 className="mt-4 text-red-800 text-center">Signup Failed</h3>
+            <h3 className="mt-4 text-red-800 text-center">{errorMsg}</h3>
           )}
         </div>
       </div>
