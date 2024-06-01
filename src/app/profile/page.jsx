@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Navbar from "../../components/navbar";
 
 const page = () => {
   const [userData, setUserData] = useState("nothing");
@@ -33,7 +34,7 @@ const page = () => {
     <>
       {verified === true ? (
         <div className="text-amber-700">
-          Welcome to your profile
+          <Navbar />
           <hr />
           <h2>
             {userData === "Nothing" ? (
