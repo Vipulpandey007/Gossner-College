@@ -32,8 +32,8 @@ const page = () => {
   return (
     <>
       {verified === true ? (
-        <div>
-          Profile Page
+        <div className="text-amber-700">
+          Welcome to your profile
           <hr />
           <h2>
             {userData === "Nothing" ? (
