@@ -1,14 +1,11 @@
-import Navbar from "../../components/navbar";
-import Sidebar from "../../components/sidebar";
+import DefaultLayout from "../../components/Layouts/DefaultLayout";
 
 const Layout = ({ children }) => {
   return (
-    <div class="bg-[#151c2c] text-white m-0 p-0">
-      <Sidebar />
-      <div>
-        <Navbar />
-      </div>
-      <div>{children}</div>
+    <div className="dark:bg-boxdark-2 dark:text-bodydark">
+      <DefaultLayout>
+        <div>{children}</div>
+      </DefaultLayout>
     </div>
   );
 };
